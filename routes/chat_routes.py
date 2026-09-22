@@ -1000,6 +1000,7 @@ def setup_chat_routes(
         incognito = str(form_data.get("incognito", "")).lower() == "true"
         plan_mode = str(form_data.get("plan_mode") or (body or {}).get("plan_mode") or "").lower() == "true"
         chat_mode = str(form_data.get("mode", "")).lower()  # 'chat' or 'agent'
+        permission_level = str(form_data.get("permission_level") or (body or {}).get("permission_level") or "workspace").lower()
         tool_approval_id = (
             form_data.get("tool_approval_id")
             or (body or {}).get("tool_approval_id")
@@ -2324,6 +2325,11 @@ def setup_chat_routes(
                     except (TypeError, ValueError):
                         _max_rounds = _DEFAULT_ROUNDS
                     _max_rounds = max(1, min(_max_rounds, 200))
+                    # Permission level from settings / user prefs
+                    try:
+                        _permission_level = get_setting("permission_level", "workspace")
+                    except Exception:
+                        _permission_level = "workspace"
 
                     _forced_tools = None
                     if _search_enabled:
@@ -2371,6 +2377,7 @@ def setup_chat_routes(
                         external_untrusted_context_seen=external_untrusted_context_seen,
                         delegated_credential=_delegated_credential,
                         exact_approval=exact_tool_approval,
+                        permission_level=_permission_level,
                     ):
                         if chunk.startswith("data: ") and not chunk.startswith("data: [DONE]"):
                             try:

@@ -3449,6 +3449,7 @@ async def stream_agent_loop(
     _is_teacher_run: bool = False,
     history_session=None,
     defer_context_shaping: bool = False,
+    permission_level: Optional[str] = None,
 ) -> AsyncGenerator[str, None]:
     """Streaming agent loop generator.
 
@@ -3478,6 +3479,12 @@ async def stream_agent_loop(
     mcp_mgr = get_mcp_manager()
     prep_timings: Dict[str, float] = {}
     disabled_tools = set(disabled_tools or [])
+    # Permission level filtering
+    if permission_level:
+        from src.permissions_levels import normalize_level, disabled_tools_for_level
+        norm_level = normalize_level(permission_level)
+        is_owner = bool(owner)  # simplistic owner check; replace with real auth if needed
+        disabled_tools.update(disabled_tools_for_level(norm_level, owner=is_owner))
     route_descriptors = list(route_descriptors or [])
     while len(route_descriptors) < 1 + len(fallbacks or []):
         route_descriptors.append({})
