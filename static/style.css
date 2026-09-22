@@ -90,6 +90,39 @@
   --select-option-active-bg: color-mix(in srgb, var(--red) 16%, var(--panel));
 }
 
+/* Aqua modern enhancements */
+:root[data-theme="aqua"], :root.aqua {
+  --panel: #ffffff;
+  --border: #b3d9ff;
+  --radius: 16px;
+  --shadow-sm: 0 2px 8px rgba(59,130,246,0.06);
+  --shadow-md: 0 4px 20px rgba(59,130,246,0.08);
+  --glass-bg: color-mix(in srgb, white 85%, transparent);
+}
+:root[data-theme="aqua"] .msg,
+:root.aqua .msg {
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+:root[data-theme="aqua"] .card,
+:root.aqua .card,
+:root[data-theme="aqua"] .modal-content,
+:root.aqua .modal-content {
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border);
+}
+:root[data-theme="aqua"] .send-btn,
+:root.aqua .send-btn {
+  border-radius: 12px;
+}
+:root[data-theme="aqua"] .mode-toggle,
+:root.aqua .mode-toggle {
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--panel) 80%, var(--bg));
+  padding: 2px;
+}
+
 /* ── Reset & Base ── */
 
 * { box-sizing: border-box; }
