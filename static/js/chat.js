@@ -1929,6 +1929,16 @@ import { loadPanel } from './panels.js';
       if (presetsModule.getSelectedPreset()) {
         fd.append('preset_id', presetsModule.getSelectedPreset());
       }
+      // Permission level
+      const permSel = document.getElementById('permission-level-select');
+      if (permSel && permSel.value) {
+        fd.append('permission_level', permSel.value);
+        // persist
+        Storage.set('permission_level', permSel.value);
+      } else {
+        const savedPerm = Storage.get('permission_level');
+        if (savedPerm) fd.append('permission_level', savedPerm);
+      }
 
       // Permission level
       const permSel = document.getElementById('permission-level-select');
