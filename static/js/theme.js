@@ -13,6 +13,28 @@ export const THEMES = {
   light:      { bg:'#f0ebe3', fg:'#5a5248', panel:'#faf6f0', border:'#d4cdc2', red:'#c47d5a' },
   midnight:   { bg:'#0d1117', fg:'#c9d1d9', panel:'#161b22', border:'#30363d', red:'#f85149' },
   paper:      { bg:'#faf8f5', fg:'#3b3836', panel:'#ffffff', border:'#d5d0c8', red:'#c5ac4a' },
+  aqua:       { 
+    bg:'#f5fbff', 
+    fg:'#0f2a44', 
+    panel:'#ffffff', 
+    border:'#b3d9ff', 
+    red:'#3b82f6',
+    advanced: {
+      brandColor: '#3b82f6',
+      brandMixTo: '#93c5fd',
+      userBubbleBg: '#e6f2ff',
+      aiBubbleBg: '#ffffff',
+      bubbleBorder: '#b3d9ff',
+      inputBg: '#ffffff',
+      inputBorder: '#b3d9ff',
+      sendBtnBg: '#3b82f6',
+      sendBtnHover: '#2563eb',
+      codeBg: '#f0f7ff',
+      codeFg: '#0f2a44',
+      sidebarBg: '#f5fbff',
+      sectionAccent: '#3b82f6'
+    }
+  },
   // Spicy / fun themes
   cyberpunk:  { bg:'#0a0a0f', fg:'#0ff0fc', panel:'#12101a', border:'#9b30ff', red:'#e040fb' },
   retrowave:  { bg:'#1a1a2e', fg:'#e94560', panel:'#16213e', border:'#533483', red:'#e94560' },
@@ -31,7 +53,7 @@ export const THEMES = {
   cute:       { bg:'#fff0f5', fg:'#d4608a', panel:'#fff8fa', border:'#f0c0d0', red:'#ff6b9d' },
 };
 
-const DEFAULT_THEME = 'dark';
+const DEFAULT_THEME = 'aqua';
 const LS_KEY = 'odysseus-theme';
 const CUSTOM_THEMES_KEY = 'odysseus-custom-themes';
 
