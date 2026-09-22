@@ -113,6 +113,10 @@ PASSWORD_MIN_LENGTH = 8
 DEFAULT_TEMPERATURE = 1.0
 DEFAULT_MAX_TOKENS = 0
 
+# Permission levels defaults
+DEFAULT_PERMISSION_LEVEL = "workspace"
+PERMISSION_LEVELS = ["workspace", "partial", "full"]
+
 
 def internal_api_base() -> str:
     """Base URL for in-process loopback calls to Odysseus's own API.
