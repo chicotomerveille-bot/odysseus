@@ -1000,6 +1000,7 @@ def setup_chat_routes(
         incognito = str(form_data.get("incognito", "")).lower() == "true"
         plan_mode = str(form_data.get("plan_mode") or (body or {}).get("plan_mode") or "").lower() == "true"
         chat_mode = str(form_data.get("mode", "")).lower()  # 'chat' or 'agent'
+        debate_mode = str(form_data.get("debate_mode") or (body or {}).get("debate_mode") or "").lower() == "true"
         permission_level = str(form_data.get("permission_level") or (body or {}).get("permission_level") or "workspace").lower()
         tool_approval_id = (
             form_data.get("tool_approval_id")
@@ -2296,6 +2297,23 @@ def setup_chat_routes(
                     _active_streams.pop(session, None)
             else:
                 # ── Agent mode: full agent loop with tools ──
+                if debate_mode:
+                    from src.agent_debate import stream_debate
+                    async for event in stream_debate(
+                        endpoint_url=sess.endpoint_url,
+                        model=sess.model,
+                        user_messages=messages,
+                        rounds=3,
+                        **{
+                            "max_tool_calls": _tool_budget,
+                            "max_rounds": _max_rounds,
+                        }
+                    ):
+                        yield f"data: {json.dumps(event)}\\n\\n"
+                    # Skip normal agent loop
+                    # Metrics placeholder
+                    yield "data: [DONE]\\n\\n"
+                    return
                 _agent_rounds = 0
                 _agent_tool_calls = 0
                 _answered_by = None  # set if the selected model failed and a fallback answered
