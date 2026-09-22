@@ -1200,6 +1200,16 @@
             <button type="button" class="mode-toggle-btn active" id="mode-agent-btn" aria-pressed="true">Agent</button>
             <button type="button" class="mode-toggle-btn" id="mode-chat-btn" aria-pressed="false">Chat</button>
           </div>
+          <!-- Permission level selector -->
+          <div class="permission-level-selector" title="Agent permission level">
+            <select id="permission-level-select" aria-label="Permission level">
+              <option value="workspace">📁 Dossier</option>
+              <option value="partial">🖥️ Partiel</option>
+              <option value="full" selected>🔓 Complet</option>
+            </select>
+          </div>
+          <!-- Debate mode toggle -->
+          <button type="button" class="debate-toggle-btn" id="debate-mode-btn" title="Mode débat multi-agents" aria-pressed="false">💬 Débat</button>
           <button type="submit" form="chat-form" class="send-btn newchat-mode" data-mode="newchat" aria-label="New chat">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><span class="send-btn-label">+ New</span>
           </button>

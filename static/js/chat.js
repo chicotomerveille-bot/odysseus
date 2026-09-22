@@ -1930,6 +1930,20 @@ import { loadPanel } from './panels.js';
         fd.append('preset_id', presetsModule.getSelectedPreset());
       }
 
+      // Permission level
+      const permSel = document.getElementById('permission-level-select');
+      if (permSel && permSel.value) {
+        fd.append('permission_level', permSel.value);
+        Storage.set('permission_level', permSel.value);
+      } else {
+        const savedPerm = Storage.get('permission_level');
+        if (savedPerm) fd.append('permission_level', savedPerm);
+      }
+      // Debate mode
+      const debateBtn = document.getElementById('debate-mode-btn');
+      if (debateBtn && debateBtn.getAttribute('aria-pressed') === 'true') {
+        fd.append('debate_mode', 'true');
+      }
 
       // Superseded during preflight (uploads, document saves): a newer send
       // owns the session. Bailing here — before registration and before the
